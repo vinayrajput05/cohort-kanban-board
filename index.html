@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="header">
+        <h2>Project Management</h2>
+        <div>
+            <button onclick="toggleProjectModal()" class="create-new-project"><i class='bx bx-plus bx-sm'></i></button>
+            <button onclick="importData()" class="create-new-project"><i class='bx bx-import bx-sm'></i></button>
+            <button onclick="exportData()" class="create-new-project"><i class='bx bx-export bx-sm'></i></button>
+        </div>
+    </div>
+
+    <div id="projectList"></div>
+
+    <!-- Modal -->
+    <div id="projectModal" class="modal-container">
+        <div class="modal">
+            <h3 class="modal-title">Create New Project</h3>
+            <input id="project-input-name" type="text" placeholder="Enter Project Name"
+                aria-placeholder="Enter Project Name">
+            <textarea id="project-input-desc" rows="8" placeholder="About project"></textarea>
+            <button id="project-create-btn">Create</button>
+
+            <button class="modal-close-btn" onclick="toggleProjectModal()">X</button>
+        </div>
+    </div>
+    <!-- Modal End-->
+
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>

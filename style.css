@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Nunito", sans-serif;
+}
+
+body{
+    padding: 50px;
+}
+
+input{
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    border: 0;
+    color: #1b1b1b;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+button{
+    cursor: pointer;
+}
+textarea{
+    width: 100%;
+    padding: 10px 16px;
+    color: #1b1b1b;
+    border-radius: 6px;
+    font-size: 16px;
+    border: 0;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+
+/* Modal Style */
+.modal-container{
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.25);
+    justify-content: center;
+    align-items: center;
+}
+.modal-container.modal-active{
+    display: flex;
+}
+
+.modal {
+    position: relative;
+    width: 500px;
+    min-height: 300px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+
+.modal-title{
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.modal-close-btn{
+    position: absolute;
+    bottom: -80px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 50px;
+    border: none;
+    font-size: 20px;
+    color: #FFFFFF;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.modal-close-btn:hover{
+    font-size: 24px;
+    transition: font-size 0.2s ease-in-out;
+}
+
+/* Project Page Styles */
+.create-new-project {
+    width: 50px;
+    height: 50px;
+    background-color: #3482ff;
+    border-radius: 100px;
+    color: #fff;
+    outline: none;
+    border: none;
+}
+
+#project-input-desc{
+    margin: 16px 0;
+}
+
+#project-create-btn{
+    width: 100%;
+    padding: 8px 10px;
+    background: #3482ff;
+    color: #FFF;
+    font-size: 20px;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#project-create-btn:hover{
+    background: #1b73ff;
+    transition: all 0.5ms ease-in-out;
+}
+
+#projectList{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+}
+
+.project-item{
+    display: flex;
+    flex-direction: row;
+    padding: 12px 16px;
+    border-radius: 5px;
+    gap: 10px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+.project-item .left{
+    width: 100%;
+}
+
+.project-item .right{
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.project-item .name{
+    font-size: 24px;
+    color: #1b1b1b;
+    text-decoration: underline #1b73ff;
+}
+
+.project-item .desc{
+    font-size: 16px;
+    color: #888;
+    font-weight: 300;
+    font-style: italic;
+    margin-top: 8px;
+}
+.project-item .date{
+    font-size: 16px;
+    color: #313131;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+.project-item .action{
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: lighter;
+    background: none;
+    border: 1px solid;
+    border-radius: 5px;
+}
+.project-item .edit{
+    border-color: #0e6bff;
+    color: #0e6bff;
+}
+.project-item .delete{
+    border-color: #ff5555;
+    color: #ff5555;
+}
+
+/* Task Page Styles */
+
+.board-list{
+    display: inline-flex;
+    gap: 20px;
+    /* overflow-x: scroll; */
+}
+.board{
+    background: #f1f1f1;
+    padding: 20px;
+    border-radius: 5px;
+    height: 78vh;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.board-header{}
+.board-title{
+    font-size: 20px;
+    color: #1b1b1b;
+}
+.board-subtitle{
+    font-size: 16px;
+    color: #888;
+}
+.board-items{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    gap: 10px;
+}
+.board-items .container{
+    display: flex;
+    justify-content: space-between;
+    background: #FFF;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    transition: all 0.3s ease-in-out;
+}
+.board-items .container .status{
+    color: #888;
+}
+.board-items .container .content{
+    color: #1b1b1b;
+}
+.board-items .container .edit{
+    cursor: pointer;
+    color: #0e6bff;
+    border: 1px solid #0e6bff;
+    background: none;
+    font-size: 22px;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 36px;
+    margin-right: 8px;
+}
+.board-items .container .delete{
+    cursor: pointer;
+    color: #ff5555;
+    border: 1px solid #ff5555;
+    background: none;
+    font-size: 22px;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 36px;
+}
+.board-footer{
+    display: flex;
+    gap: 8px;
+}
+.board-footer button{
+    width: 50px;
+    font-size: 24px;
+}
+
+.dragging{
+    transform: rotate(5deg);
+    transition: all 0.3s ease-in-out;
+}

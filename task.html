@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="header">
+        <h2 id="projectName"></h2>
+    </div>
+
+    <div class="board-list">
+        <div class="board" data-status="todo">
+            <div class="board-header">
+                <p class="board-title">To Do</p>
+                <p class="board-subtitle">Abhi Karne baki hai</p>
+            </div>
+            <div id="todoItems" class="board-items"></div>
+            <div class="board-footer">
+                <input type="text" placeholder="Write here...">
+                <button onclick="addNewTask(this,'todo')">+</button>
+            </div>
+        </div>
+
+        <div class="board" data-status="inProgress">
+            <div class="board-header">
+                <p class="board-title">In Progress</p>
+                <p class="board-subtitle">Work chal raha hai</p>
+            </div>
+            <div id="inProgressItems" class="board-items"></div>
+            <div class="board-footer">
+                <input type="text" placeholder="Write here...">
+                <button onclick="addNewTask(this,'inProgress')">+</button>
+            </div>
+        </div>
+
+        <div class="board" data-status="done">
+            <div class="board-header">
+                <p class="board-title">Done</p>
+                <p class="board-subtitle">Work pura ho gaya hai</p>
+            </div>
+            <div id="doneItems" class="board-items"></div>
+            <div class="board-footer">
+                <input type="text" placeholder="Write here...">
+                <button onclick="addNewTask(this,'done')">+</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="task.js"></script>
+</body>
+
+</html>
