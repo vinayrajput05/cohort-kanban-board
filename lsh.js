@@ -47,6 +47,11 @@ class LSHelper {
     // Board methods
     createBoard(title, subtitle, color) {
         const project = this.#store.find(item => item.pid === this.#pid);
+        const check = project.boards.find(item => item.title.toLowerCase() === title.toLowerCase());
+        if (check) {
+            alert('Board already exists')
+            return
+        }
         project.boards.push({ title, subtitle, color })
         localStorage.setItem('store', JSON.stringify(this.#store))
     }
@@ -60,34 +65,60 @@ class LSHelper {
     deleteBoard(index) {
         const project = this.#store.find(item => item.pid === this.#pid);
         const board = project.boards.splice(index, 1)
-        project.tasks = project.tasks.filter(item => item.board !== board[0].title)
+        const key = board[0].title.toLowerCase()
+        project.tasks = project.tasks.filter(item => item.status !== key)
         localStorage.setItem('store', JSON.stringify(this.#store))
     }
 
     // Task methods
     addTask(status, content) {
         const project = this.#store.find(item => item.pid === this.#pid);
+        const id = `tid-${project.tasks?.length + 1}`;
+        const order = project.tasks?.length + 1;
         const createdAt = new Date();
-        project.tasks.push({ status, content, createdAt })
+        project.tasks.push({ id, status, content, order, createdAt })
         localStorage.setItem('store', JSON.stringify(this.#store))
     }
 
-    deleteTask(index) {
+    deleteTask(id) {
         const project = this.#store.find(item => item.pid === this.#pid);
+        if (!project) return
+        const index = project.tasks.findIndex(t => t.id === id);
+        if (index === -1) return;
         project.tasks.splice(index, 1)
         localStorage.setItem('store', JSON.stringify(this.#store))
     }
 
-    updateTaskStatus(index, status) {
+    updateTaskStatus(id, status) {
         const project = this.#store.find(item => item.pid === this.#pid);
-        project.tasks[index].status = status;
+        if (!project) return
+        const task = project.tasks.find(t => t.id === id);
+        if (!task) return
+        task.status = status;
         localStorage.setItem('store', JSON.stringify(this.#store))
     }
 
-    updateTask(index, content) {
+    updateTask(id, content) {
         const project = this.#store.find(item => item.pid === this.#pid);
-        project.tasks[index].content = content;
+        if (!project) return
+        const task = project.tasks.find(t => t.id === id);
+        if (!task) return
+        task.content = content;
         localStorage.setItem('store', JSON.stringify(this.#store))
+    }
+
+    reorderTask(currentId, aboveTaskId) {
+        const project = this.#store.find(item => item.pid === this.#pid);
+        if (!project) return;
+
+        let currentTask = project.tasks.find(task => task.id === currentId);
+        let aboveTask = project.tasks.find(task => task.id === aboveTaskId);
+
+        if (!currentTask || !aboveTask) return;
+
+        // Swap their order values
+        [currentTask.order, aboveTask.order] = [aboveTask.order, currentTask.order];
+        localStorage.setItem('store', JSON.stringify(this.#store));
     }
 
     // File methods

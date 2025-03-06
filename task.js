@@ -13,18 +13,21 @@ const createNewBoardBtn = document.getElementById('createNewBoardBtn');
 const boardList = document.querySelector('.board-list')
 
 function createList(items, tasks, ids) {
-    tasks && tasks.forEach((task, i) => {
-        const index = ids.index;
+    if (!tasks) return;
+    const sortedTasks = tasks.sort((a, b) => b.order - a.order);
+    sortedTasks.forEach((task) => {
         const container = document.createElement('div');
-        container.setAttribute('t-index', index)
+        container.setAttribute('tid', task.id)
         container.setAttribute('draggable', 'true')
         container.classList.add('container');
 
         container.addEventListener('dragstart', function () {
             container.classList.add('dragging')
+            container.setAttribute('board', task.status)
         })
         container.addEventListener('dragend', function () {
             container.classList.remove('dragging')
+            container.removeAttribute('board')
         })
 
         const now = new Date(task.createdAt);
@@ -58,13 +61,13 @@ function createList(items, tasks, ids) {
         editBtn.addEventListener('click', function () {
             items.nextElementSibling.firstElementChild.value = task.content;
             items.nextElementSibling.lastElementChild.textContent = 'Update Task';
-            items.nextElementSibling.firstElementChild.setAttribute('t-index', index);
+            items.nextElementSibling.firstElementChild.setAttribute('tid', task.id);
         })
 
         deleteBtn.classList.add('delete')
         deleteBtn.innerHTML = `<i class='bx bx-trash'></i>`
         deleteBtn.addEventListener('click', function () {
-            lsHelper.deleteTask(index)
+            lsHelper.deleteTask(task.id)
             showBoard()
         })
         rightDiv.appendChild(editBtn)
@@ -143,16 +146,22 @@ function showBoard() {
         })
 
         let timeoutId = null
-        board.addEventListener('dragleave', () => {
+        board.addEventListener('dragleave', (e) => {
             const item = document.querySelector('.dragging')
             board.querySelector('.board-items').appendChild(item)
-            const index = item.getAttribute('t-index');
+            const id = item.getAttribute('tid');
+            const oldBoard = item.getAttribute('board');
             const status = board.getAttribute('data-status');
+            const aboveTaskId = e.target.getAttribute('tid');
 
             clearTimeout(timeoutId);
             timeoutId = setTimeout(() => {
-                lsHelper.updateTaskStatus(index, status)
-            }, 1000)
+                if (aboveTaskId && id !== aboveTaskId && oldBoard === status) {
+                    lsHelper.reorderTask(id, aboveTaskId)
+                } else {
+                    lsHelper.updateTaskStatus(id, status)
+                }
+            }, 500)
         })
 
         headerLeft.appendChild(title)
@@ -182,10 +191,10 @@ function addNewTask(e, type) {
         alert("You can't add empty")
     }
 
-    const index = input.getAttribute('t-index')
-    if (index !== null) {
-        input.removeAttribute('t-index')
-        lsHelper.updateTask(index, input.value)
+    const tid = input.getAttribute('tid')
+    if (tid !== null) {
+        input.removeAttribute('tid')
+        lsHelper.updateTask(tid, input.value)
     } else {
         lsHelper.addTask(type, input.value)
     }
