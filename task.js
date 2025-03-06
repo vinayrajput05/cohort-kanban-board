@@ -111,6 +111,7 @@ function showBoard() {
         subtitle.classList.add('board-subtitle');
         items.classList.add('board-items');
         footer.classList.add('board-footer');
+        board.setAttribute('data-status', key)
 
         if (groupedTasks[key]?.length) {
             title.textContent = `${boardItem.title} (${groupedTasks[key]?.length})`
