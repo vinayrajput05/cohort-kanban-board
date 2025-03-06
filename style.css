@@ -40,6 +40,9 @@ textarea{
     font-weight: bold;
     margin-bottom: 50px;
 }
+.header h2{
+    text-transform: capitalize;
+}
 
 
 /* Modal Style */
@@ -104,11 +107,11 @@ textarea{
     border: none;
 }
 
-#project-input-desc{
+#project-input-desc, #boardInputSubtitle{
     margin: 16px 0;
 }
 
-#project-create-btn{
+#project-create-btn, #boardCreateBtn{
     width: 100%;
     padding: 8px 10px;
     background: #3482ff;
@@ -190,19 +193,24 @@ textarea{
 .board-list{
     display: inline-flex;
     gap: 20px;
-    /* overflow-x: scroll; */
+    width: 93vw;
+    overflow-x: auto;
 }
 .board{
     background: #f1f1f1;
     padding: 20px;
     border-radius: 5px;
-    height: 78vh;
+    height: 75vh;
     width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.board-header{}
+.board-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .board-title{
     font-size: 20px;
     color: #1b1b1b;
@@ -217,6 +225,8 @@ textarea{
     flex-direction: column;
     margin-top: 30px;
     gap: 10px;
+    overflow-y: auto;
+    margin-bottom: 10px;
 }
 .board-items .container{
     display: flex;
@@ -233,7 +243,7 @@ textarea{
 .board-items .container .content{
     color: #1b1b1b;
 }
-.board-items .container .edit{
+.edit{
     cursor: pointer;
     color: #0e6bff;
     border: 1px solid #0e6bff;
@@ -246,7 +256,7 @@ textarea{
     border-radius: 36px;
     margin-right: 8px;
 }
-.board-items .container .delete{
+.delete{
     cursor: pointer;
     color: #ff5555;
     border: 1px solid #ff5555;
@@ -258,16 +268,72 @@ textarea{
     align-items: center;
     border-radius: 36px;
 }
+
+.edit-board{
+    cursor: pointer;
+    color: #0e6bff;
+    background: none;
+    font-size: 22px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;
+    border: 0;
+}
+.delete-board{
+    cursor: pointer;
+    color: #ff5555;
+    background: none;
+    font-size: 22px;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+}
+
 .board-footer{
     display: flex;
     gap: 8px;
 }
 .board-footer button{
-    width: 50px;
-    font-size: 24px;
+    font-size: 16px;
+    background: #0e6bff;
+    padding: 0 10px;
+    border: 0;
+    color: #FFF;
+    border-radius: 4px;
+    text-wrap: nowrap;
 }
 
 .dragging{
     transform: rotate(5deg);
     transition: all 0.3s ease-in-out;
+}
+
+.empty-project{
+    width: 100%;
+    background-color: #eeeeee;
+    text-align: center;
+    padding: 100px 0;
+    font-size: 50px;
+    color: #b6b6b6;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+.empty-task{
+    width: 94vw;
+    background-color: #eeeeee;
+    text-align: center;
+    padding: 100px 0;
+    font-size: 50px;
+    color: #b6b6b6;
+}
+
+.color-input-container{
+    margin-bottom: 12px;
+}
+
+.color-input-container input{
+    padding: 0;
+    border-radius: 0;
+    height: 36px;
+    border: 0;
 }

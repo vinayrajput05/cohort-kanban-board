@@ -6,6 +6,7 @@ const projectModal = document.getElementById('projectModal');
 const projectInputName = document.getElementById('project-input-name');
 const projectInputDesc = document.getElementById('project-input-desc');
 const projectCreateBtn = document.getElementById('project-create-btn');
+const createNewProjectBtn = document.getElementById('createNewProjectBtn');
 // DOM References End
 
 const lsHelper = new LSHelper();
@@ -42,6 +43,7 @@ function showProjects() {
             projectInputName.setAttribute('t-index', index)
             projectInputName.value = project.name;
             projectInputDesc.value = project.desc;
+            projectCreateBtn.textContent = 'Update'
             toggleProjectModal()
         })
 
@@ -84,6 +86,10 @@ function showProjects() {
         container.appendChild(rightContainer)
         projectList.appendChild(container)
     })
+    
+    if (projects.length === 0) {
+        projectList.innerHTML = `<div class="empty-project">Create New Project</div>`
+    }
 }
 showProjects()
 
@@ -121,3 +127,9 @@ function createProject() {
 }
 
 projectCreateBtn.addEventListener('click', createProject)
+createNewProjectBtn.addEventListener('click', () => {
+    projectInputName.value = ''
+    projectInputDesc.value = ''
+    projectCreateBtn.textContent = 'Create'
+    toggleProjectModal();
+})

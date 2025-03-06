@@ -8,6 +8,7 @@ class LSHelper {
         this.#pid = pid;
     }
 
+    // Project methods
     fetchProjects() {
         return this.#store;
     }
@@ -21,6 +22,7 @@ class LSHelper {
             desc,
             createdAt,
             tasks: [],
+            boards: []
         }
         this.#store.push(project)
         localStorage.setItem('store', JSON.stringify(this.#store))
@@ -32,7 +34,6 @@ class LSHelper {
         localStorage.setItem('store', JSON.stringify(this.#store))
     }
 
-
     deleteProject(pid) {
         const index = this.#store.findIndex(item => item.pid === pid);
         this.#store.splice(index, 1)
@@ -43,9 +44,31 @@ class LSHelper {
         return this.#store.find(item => item.pid === this.#pid);
     }
 
+    // Board methods
+    createBoard(title, subtitle, color) {
+        const project = this.#store.find(item => item.pid === this.#pid);
+        project.boards.push({ title, subtitle, color })
+        localStorage.setItem('store', JSON.stringify(this.#store))
+    }
+
+    updateBoard(index, title, subtitle, color) {
+        const project = this.#store.find(item => item.pid === this.#pid);
+        project.boards[index] = { title, subtitle, color };
+        localStorage.setItem('store', JSON.stringify(this.#store))
+    }
+
+    deleteBoard(index) {
+        const project = this.#store.find(item => item.pid === this.#pid);
+        const board = project.boards.splice(index, 1)
+        project.tasks = project.tasks.filter(item => item.board !== board[0].title)
+        localStorage.setItem('store', JSON.stringify(this.#store))
+    }
+
+    // Task methods
     addTask(status, content) {
         const project = this.#store.find(item => item.pid === this.#pid);
-        project.tasks.push({ status, content })
+        const createdAt = new Date();
+        project.tasks.push({ status, content, createdAt })
         localStorage.setItem('store', JSON.stringify(this.#store))
     }
 
@@ -60,12 +83,14 @@ class LSHelper {
         project.tasks[index].status = status;
         localStorage.setItem('store', JSON.stringify(this.#store))
     }
+
     updateTask(index, content) {
         const project = this.#store.find(item => item.pid === this.#pid);
         project.tasks[index].content = content;
         localStorage.setItem('store', JSON.stringify(this.#store))
     }
 
+    // File methods
     export() {
         try {
             const json = JSON.stringify(this.#store, null, 2);

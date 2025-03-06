@@ -12,45 +12,30 @@
 <body>
     <div class="header">
         <h2 id="projectName"></h2>
+        <button id="createNewBoardBtn" class="create-new-project"><i class='bx bx-plus bx-sm'></i></button>
     </div>
 
-    <div class="board-list">
-        <div class="board" data-status="todo">
-            <div class="board-header">
-                <p class="board-title">To Do</p>
-                <p class="board-subtitle">Abhi Karne baki hai</p>
-            </div>
-            <div id="todoItems" class="board-items"></div>
-            <div class="board-footer">
-                <input type="text" placeholder="Write here...">
-                <button onclick="addNewTask(this,'todo')">+</button>
-            </div>
-        </div>
+    <div class="board-list"></div>
 
-        <div class="board" data-status="inProgress">
-            <div class="board-header">
-                <p class="board-title">In Progress</p>
-                <p class="board-subtitle">Work chal raha hai</p>
-            </div>
-            <div id="inProgressItems" class="board-items"></div>
-            <div class="board-footer">
-                <input type="text" placeholder="Write here...">
-                <button onclick="addNewTask(this,'inProgress')">+</button>
-            </div>
-        </div>
+    <!-- Modal -->
+    <div id="boardModal" class="modal-container">
+        <div class="modal">
+            <h3 class="modal-title">Create New Board</h3>
 
-        <div class="board" data-status="done">
-            <div class="board-header">
-                <p class="board-title">Done</p>
-                <p class="board-subtitle">Work pura ho gaya hai</p>
+            <div class="color-input-container">
+                <label for="boardInputColor">Board Background</label>
+                <input id="boardInputColor" type="color" aria-placeholder="Input color">
             </div>
-            <div id="doneItems" class="board-items"></div>
-            <div class="board-footer">
-                <input type="text" placeholder="Write here...">
-                <button onclick="addNewTask(this,'done')">+</button>
-            </div>
+            <input id="boardInputTitle" type="text" placeholder="Enter Board Title"
+                aria-placeholder="Enter Board Title">
+            <input id="boardInputSubtitle" type="text" placeholder="Enter Board Subtitle"
+                aria-placeholder="Enter Board Subtitle">
+            <button id="boardCreateBtn">Create</button>
+
+            <button class="modal-close-btn" onclick="toggleBoardModal()">X</button>
         </div>
     </div>
+    <!-- Modal End-->
 
     <script type="module" src="task.js"></script>
 </body>
