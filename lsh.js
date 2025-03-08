@@ -58,7 +58,14 @@ class LSHelper {
 
     updateBoard(index, title, subtitle, color) {
         const project = this.#store.find(item => item.pid === this.#pid);
+        const board = project.boards[index];
         project.boards[index] = { title, subtitle, color };
+
+        project.tasks.map(task => {
+            if (task.status == board.title.toLowerCase()) {
+                task.status = title.toLowerCase();
+            }
+        })
         localStorage.setItem('store', JSON.stringify(this.#store))
     }
 
